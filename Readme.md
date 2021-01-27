@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
 * Студент: [Олег Акимов](https://up.htmlacademy.ru/javascript/22/user/1061909).
-* Наставник: `Неизвестно`.
+* Наставник: [Дмитрий Гуляев](https://htmlacademy.ru/profile/dima).
 
 ---
 
