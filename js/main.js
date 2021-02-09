@@ -1,6 +1,18 @@
 'use strict';
 
 const NUMBER_OF_ADS = 10;
+const COORDINATE_ACCURACY = 5;
+const MIN_LATITUDE = 35.65000;
+const MAX_LATITUDE = 35.70000;
+const MIN_LONGITUDE = 139.70000;
+const MAX_LONGITUDE = 139.80000;
+const MIN_PRICE = 3000;
+const MAX_PRICE = 150000;
+const MIN_ROOM_NUMBER = 1;
+const MAX_ROOM_NUMBER = 15;
+const MIN_GUESTS_NUMBER = 1;
+const MAX_GUESTS_NUMBER = 10;
+
 
 const avatarPics = [
   '01',
@@ -63,26 +75,26 @@ const getRandomArrayElement = (elements) =>
 
 
 const getRandomArray = (items) => {
-  const RandomArray = [];
+  const randomArray = [];
   for (let i = 0; i < items.length; i++) {
     const item = getRandomArrayElement(items);
-    const isItemInclude = RandomArray.some(function (value) {
+    const isItemInclude = randomArray.some(function (value) {
       return value === item;
     })
     if (!isItemInclude) {
-      RandomArray.push(item);
+      randomArray.push(item);
     } else {
       i--;
     }
   }
-  RandomArray.length = getRandom(1, items.length);
-  return RandomArray;
+  randomArray.length = getRandom(1, items.length);
+  return randomArray;
 };
 
 
 const createRentalAd = () => {
-  const locationX = getRandomPoint(35.65000, 35.70000, 6);
-  const locationY = getRandomPoint(139.70000, 139.80000, 6);
+  const locationX = getRandomPoint(MIN_LATITUDE, MAX_LATITUDE, COORDINATE_ACCURACY);
+  const locationY = getRandomPoint(MIN_LONGITUDE, MAX_LONGITUDE, COORDINATE_ACCURACY);
   return {
     author: {
       avatar: 'img/avatars/user' + getRandomArrayElement(avatarPics) + '.png',
@@ -90,10 +102,10 @@ const createRentalAd = () => {
     offer: {
       title: 'Недвижимость в центре города',
       address: locationX.toString() + ', ' + locationY.toString(),
-      price: getRandom(3000, 150000),
+      price: getRandom(MIN_PRICE, MAX_PRICE),
       type: getRandomArrayElement(propertyTypes),
-      rooms: getRandom(1, 15),
-      guests: getRandom(1,10),
+      rooms: getRandom(MIN_ROOM_NUMBER, MAX_ROOM_NUMBER),
+      guests: getRandom(MIN_GUESTS_NUMBER, MAX_GUESTS_NUMBER),
       checkin: getRandomArrayElement(checkinCheckoutTimes),
       checkout: getRandomArrayElement(checkinCheckoutTimes),
       features: getRandomArray(featuresList),
