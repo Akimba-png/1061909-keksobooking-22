@@ -79,7 +79,6 @@ const createRentalAd = () => {
   }
 };
 
-const stackOfAds = new Array(NUMBER_OF_ADS).fill(null).map(() => createRentalAd());
+const createRentalAds =  () => new Array(NUMBER_OF_ADS).fill(null).map(() => createRentalAd());
 
-const startBooking = () => stackOfAds;
-startBooking();
+export {createRentalAds};

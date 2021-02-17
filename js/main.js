@@ -1,1 +1,1 @@
-import './stack-of-ads.js';
+import './render-ads.js';
