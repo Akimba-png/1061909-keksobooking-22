@@ -3,8 +3,14 @@ import {createRentalAds} from './create-ads.js'
 const adBlock = document.querySelector('.map__canvas');
 const adTemplate = document.querySelector('#card').content.querySelector('.popup');
 
-const checkPropertyType = (property) => (property === 'flat') ? 'Квартира' :
-  (property === 'bungalow') ? 'Бунгало' : (property === 'house') ? 'Дом' : 'Дворец';
+let propertyType = {
+  'palace': 'Дворец',
+  'flat': 'Квартира',
+  'house': 'Дом',
+  'bungalow': 'Бунгало',
+};
+
+const checkPropertyType = (property) => propertyType[property];
 
 const renderFeatureIcons = (possibleFeatureElements, availbaleFeatures) => {
   possibleFeatureElements.forEach((possibleFeatureElement) => {
