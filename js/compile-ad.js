@@ -1,5 +1,3 @@
-import {createRentalAds} from './create-ads.js'
-
 const adTemplate = document.querySelector('#card').content.querySelector('.popup');
 
 const propertyType = {
@@ -25,11 +23,10 @@ const renderFeatureIcons = (possibleFeatureElements, availbaleFeatures) => {
   });
 };
 
-const randomAds = createRentalAds();
-const adsListFragment = document.createDocumentFragment();
 
-randomAds.forEach(({author: {avatar}, offer: {title, address, price, type, rooms, guests, checkin,
-  checkout, features, description, photos}}) => {
+const compileAd = ({author: {avatar}, offer: {title, address, price, type, rooms, guests,
+  checkin, checkout, features, description, photos}}) => {
+
   const adElement = adTemplate.cloneNode(true);
 
   const createFotoFragment = () => {
@@ -56,7 +53,7 @@ randomAds.forEach(({author: {avatar}, offer: {title, address, price, type, rooms
   adElement.querySelector('.popup__photos').appendChild(createFotoFragment());
   adElement.querySelector('.popup__avatar').src = avatar;
 
-  adsListFragment.appendChild(adElement);
-});
+  return adElement;
+};
 
-export {randomAds};
+export {compileAd};
