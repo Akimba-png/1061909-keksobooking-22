@@ -1,9 +1,8 @@
 import {createRentalAds} from './create-ads.js'
 
-const adBlock = document.querySelector('.map__canvas');
 const adTemplate = document.querySelector('#card').content.querySelector('.popup');
 
-let propertyType = {
+const propertyType = {
   'palace': 'Дворец',
   'flat': 'Квартира',
   'house': 'Дом',
@@ -60,4 +59,4 @@ randomAds.forEach(({author: {avatar}, offer: {title, address, price, type, rooms
   adsListFragment.appendChild(adElement);
 });
 
-adBlock.appendChild(adsListFragment.firstChild);
+export {randomAds};
