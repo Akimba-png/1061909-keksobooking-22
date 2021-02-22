@@ -1,1 +1,1 @@
-import './render-ads.js';
+import './render-map.js';
