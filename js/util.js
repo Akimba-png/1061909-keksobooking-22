@@ -35,4 +35,18 @@ const getRandomArray = (items) => {
   return randomArray;
 };
 
-export {getRandom, getRandomPoint, getRandomArrayElement, getRandomArray};
+
+const checkResponseStatus = (response) => {
+  if (response.ok) {
+    return response;
+  } else {
+    throw new Error('При работе с сервером возникла непредвиденная ошибка');
+  }
+};
+
+
+const isEscEvent = (evt) => {
+  return evt.key === ('Escape' || 'Esc');
+};
+
+export {getRandom, getRandomPoint, getRandomArrayElement, getRandomArray, checkResponseStatus, isEscEvent};
