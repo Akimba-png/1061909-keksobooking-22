@@ -1,5 +1,4 @@
 /* global L:readonly */
-import {createRentalAds} from './create-ads.js';
 import {compileAd} from './compile-ad.js';
 
 const AD_FORM_DISABLED_CLASS = 'ad-form--disabled';
@@ -55,7 +54,7 @@ const getAnchorSize = (iconSize) => {
 };
 
 const mainPinIcon = L.icon({
-  iconUrl: './../img/main-pin.svg',
+  iconUrl: 'img/main-pin.svg',
   iconSize: MAIN_PIN_ICON_SIZES,
   iconAnchor: getAnchorSize(MAIN_PIN_ICON_SIZES),
 });
@@ -81,36 +80,45 @@ addressField.value = getCoordinateValue(defaultCoordinate);
 
 mainPinMarker.on('moveend', (evt) => {
   const currentCoordinate = evt.target.getLatLng();
-  addressField.value = getCoordinateValue(currentCoordinate);
+  addressField.value = getCoordinateValue(currentCoordinate)
 });
 
 
-const randomAds = createRentalAds();
+const changeMainPinPosition = (newCoordinate = defaultCoordinate) => {
+  mainPinMarker.setLatLng(newCoordinate);
+  addressField.value =  getCoordinateValue(newCoordinate);
+};
 
-randomAds.forEach((randomAd) => {
-  const simpleIcon = L.icon(
-    {
-      iconUrl: './../img/pin.svg',
-      iconSize: SIMPLE_ICON_SIZES,
-      iconAnchor: getAnchorSize(SIMPLE_ICON_SIZES),
-    },
-  );
 
-  const marker = L.marker({
-    lat: randomAd.location.x,
-    lng: randomAd.location.y,
-  },
-  {
-    icon: simpleIcon,
-  },
-  );
+const renderAdIcons = (rentalAds) => {
 
-  marker
-    .addTo(map)
-    .bindPopup(
-      compileAd(randomAd),
+  rentalAds.forEach((rentalAd) => {
+    const simpleIcon = L.icon(
       {
-        keepInView: true,
+        iconUrl: 'img/pin.svg',
+        iconSize: SIMPLE_ICON_SIZES,
+        iconAnchor: getAnchorSize(SIMPLE_ICON_SIZES),
       },
     );
-});
+
+    const marker = L.marker({
+      lat: rentalAd.location.lat,
+      lng: rentalAd.location.lng,
+    },
+    {
+      icon: simpleIcon,
+    },
+    );
+
+    marker
+      .addTo(map)
+      .bindPopup(
+        compileAd(rentalAd),
+        {
+          keepInView: true,
+        },
+      );
+  });
+};
+
+export {renderAdIcons, changeMainPinPosition};
