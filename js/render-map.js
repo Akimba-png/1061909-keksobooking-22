@@ -54,7 +54,7 @@ const getAnchorSize = (iconSize) => {
 };
 
 const mainPinIcon = L.icon({
-  iconUrl: './../img/main-pin.svg',
+  iconUrl: 'img/main-pin.svg',
   iconSize: MAIN_PIN_ICON_SIZES,
   iconAnchor: getAnchorSize(MAIN_PIN_ICON_SIZES),
 });
@@ -95,7 +95,7 @@ const renderAdIcons = (rentalAds) => {
   rentalAds.forEach((rentalAd) => {
     const simpleIcon = L.icon(
       {
-        iconUrl: './../img/pin.svg',
+        iconUrl: 'img/pin.svg',
         iconSize: SIMPLE_ICON_SIZES,
         iconAnchor: getAnchorSize(SIMPLE_ICON_SIZES),
       },
@@ -110,7 +110,7 @@ const renderAdIcons = (rentalAds) => {
     },
     );
 
-     marker
+    marker
       .addTo(map)
       .bindPopup(
         compileAd(rentalAd),
