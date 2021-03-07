@@ -1,7 +1,10 @@
 import {checkResponseStatus, showErrorMessage} from './util.js';
 
+const DOWNLOAD_URL = 'https://22.javascript.pages.academy/keksobooking/data';
+const UPLOAD_URL = 'https://22.javascript.pages.academy/keksobooking';
+
 const getData = (onSuccess) => {
-  fetch('https://22.javascript.pages.academy/keksobooking/data')
+  fetch(DOWNLOAD_URL)
     .then(checkResponseStatus)
     .then((response) => response.json())
     .then((json) => onSuccess(json))
@@ -9,8 +12,8 @@ const getData = (onSuccess) => {
 };
 
 
-const sendData = (body, onSuccess, onFail, operateOption)=> {
-  fetch('https://22.javascript.pages.academy/keksobooking',
+const sendData = (body, onSuccess, onFail, callback)=> {
+  fetch(UPLOAD_URL,
     {
       method: 'POST',
       body,
@@ -18,7 +21,7 @@ const sendData = (body, onSuccess, onFail, operateOption)=> {
     .then(checkResponseStatus)
     .then((response) => response.json())
     .then(() => onSuccess())
-    .then(() => operateOption())
+    .then(() => callback())
     .catch(() => onFail());
 };
 

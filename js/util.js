@@ -74,5 +74,12 @@ const showErrorMessage = () => {
   }, ERROR_MESSAGE_SHOW_TIME);
 };
 
+const debounce = (callback, delay) => {
+  let timerId;
+  return () => {
+    clearTimeout(timerId);
+    timerId = setTimeout(callback, delay);
+  };
+};
 
-export {getRandom, getRandomPoint, getRandomArrayElement, getRandomArray, checkResponseStatus, isEscEvent, showErrorMessage};
+export {getRandom, getRandomPoint, getRandomArrayElement, getRandomArray, checkResponseStatus, isEscEvent, showErrorMessage, debounce};
