@@ -11,6 +11,7 @@ const resetForms = () => {
   forms.forEach((form) => form.reset());
   changeMainPinPosition();
   resetPicToDefault();
+  checkPropertyCost();
 };
 
 
@@ -30,19 +31,16 @@ resetButton.addEventListener('click', (evt) => {
 
 
 
-
-
 const typeInput = userForm.querySelector('#type');
 const priceInput = userForm.querySelector('#price');
 const timeIn = userForm.querySelector('#timein');
 const timeOut = userForm.querySelector('#timeout');
 
-
 const propertyCost = {
-  bungalow: {minValue: 0, placeholder: "0"},
-  flat: {minValue: 1000, placeholder: "1000"},
-  house: {minValue: 5000, placeholder: "5000"},
-  palace: {minValue: 10000, placeholder: "10000"},
+  bungalow: {minValue: 0, placeholder: '0'},
+  flat: {minValue: 1000, placeholder: '1000'},
+  house: {minValue: 5000, placeholder: '5000'},
+  palace: {minValue: 10000, placeholder: '10000'},
 };
 
 
@@ -51,13 +49,10 @@ const checkPropertyCost = (type = 'flat') => {
   priceInput.placeholder = propertyCost[type].placeholder;
 };
 
-
-//Добавить вызов этой функции в резет и в онлоад, отсюда удалить
-checkPropertyCost();
-
 typeInput.addEventListener('change', (evt) => {
   checkPropertyCost(evt.target.value.toString());
 });
+
 
 const setCheckOutTime = (checkIn) => {
   timeOut.value = checkIn;
@@ -75,8 +70,4 @@ timeOut.addEventListener('change', (evt) => {
   setCheckInTime(evt.target.value);
 });
 
-
-
-
-
-export {submitForm};
+export {submitForm, checkPropertyCost};
