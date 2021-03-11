@@ -1,5 +1,6 @@
 import {changeMainPinPosition} from './render-map.js';
 import {sendData} from './api.js';
+import {resetPicToDefault} from './image-preview.js'
 
 const userForm = document.querySelector('.ad-form');
 const resetButton = userForm.querySelector('.ad-form__reset');
@@ -9,6 +10,7 @@ const resetForms = () => {
   const forms = document.querySelectorAll('form');
   forms.forEach((form) => form.reset());
   changeMainPinPosition();
+  resetPicToDefault();
 };
 
 
