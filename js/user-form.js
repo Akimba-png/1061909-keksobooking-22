@@ -20,6 +20,7 @@ const resetForms = () => {
   checkPropertyCost();
   showFrame(titleInput);
   showFrame(priceInput);
+  showFrame(guestInput);
 };
 
 
@@ -38,7 +39,6 @@ resetButton.addEventListener('click', (evt) => {
 });
 
 
-
 const typeInput = userForm.querySelector('#type');
 const priceInput = userForm.querySelector('#price');
 const timeIn = userForm.querySelector('#timein');
@@ -55,6 +55,11 @@ const propertyCost = {
 const checkPropertyCost = (type = 'flat') => {
   priceInput.min = propertyCost[type].minValue;
   priceInput.placeholder = propertyCost[type].placeholder;
+  if (parseInt(priceInput.value) > parseInt(priceInput.min) && parseInt(priceInput.value) < PRICE_LIMIT || priceInput.value === '') {
+    showFrame(priceInput)
+  } else {
+    showFrame(priceInput, ERROR_COLOR)
+  }
 };
 
 typeInput.addEventListener('change', (evt) => {
@@ -77,7 +82,6 @@ timeIn.addEventListener('change', (evt) => {
 timeOut.addEventListener('change', (evt) => {
   setCheckInTime(evt.target.value);
 });
-
 
 
 const showFrame = (input, color = 'transparent') => {
@@ -146,5 +150,39 @@ const onPriceChange = () => {
 
 priceInput.addEventListener('input', onPriceChange());
 priceInput.addEventListener('invalid', onPriceChange());
+
+
+const roomInput = userForm.querySelector('#room_number');
+const guestInput = userForm.querySelector('#capacity');
+
+const onCapacityChange = () => {
+  return (evt) => {
+    const roomNumber = roomInput.value;
+    const guestNumber = guestInput.value;
+
+    if (roomNumber === '100' && guestNumber !== '0') {
+      setCustomMessage(guestInput, 'Недоступно для гостей');
+      showFrame(guestInput, ERROR_COLOR);
+    } else if (guestNumber === '0' && roomNumber !== '100') {
+      setCustomMessage(guestInput, 'доступно только для 100 комнат');
+      showFrame(guestInput, ERROR_COLOR);
+    } else if (guestNumber > roomNumber) {
+      setCustomMessage(guestInput, `доступное кол-во гостей не более ${roomNumber}`);
+      showFrame(guestInput, ERROR_COLOR);
+    } else {
+      setCustomMessage(guestInput, '');
+      showFrame(guestInput);
+    }
+
+    if (evt.type === 'change') {
+      guestInput.reportValidity();
+    }
+  };
+}
+
+guestInput.addEventListener('change', onCapacityChange());
+guestInput.addEventListener('invalid', onCapacityChange());
+
+roomInput.addEventListener('change',onCapacityChange());
 
 export {submitForm, checkPropertyCost};
