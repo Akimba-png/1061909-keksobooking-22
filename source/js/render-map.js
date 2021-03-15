@@ -1,8 +1,9 @@
-/* global L:readonly */
 import {compileAd} from './compile-ad.js';
 import {getData} from './api.js';
 import {debounce} from './util.js';
 import {checkPropertyCost} from './user-form.js';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 
 const AD_FORM_DISABLED_CLASS = 'ad-form--disabled';
 const FILTER_FORM_DISABLED_CLASS = 'map__filters--disabled';
