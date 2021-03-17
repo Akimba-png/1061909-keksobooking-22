@@ -4,6 +4,7 @@ import {resetPicToDefault} from './image-preview.js'
 
 const ERROR_COLOR = '#ff0000';
 const PRICE_LIMIT = 1000000;
+const MAX_ROOM_NUMBER = '100';
 const TitleLength = {
   MIN: 30,
   MAX: 100,
@@ -160,11 +161,11 @@ const onCapacityChange = () => {
     const roomNumber = roomInput.value;
     const guestNumber = guestInput.value;
 
-    if (roomNumber === '100' && guestNumber !== '0') {
+    if (roomNumber === MAX_ROOM_NUMBER && guestNumber !== '0') {
       setCustomMessage(guestInput, 'Недоступно для гостей');
       showFrame(guestInput, ERROR_COLOR);
-    } else if (guestNumber === '0' && roomNumber !== '100') {
-      setCustomMessage(guestInput, 'доступно только для 100 комнат');
+    } else if (guestNumber === '0' && roomNumber !== MAX_ROOM_NUMBER) {
+      setCustomMessage(guestInput, `доступно только для ${MAX_ROOM_NUMBER} комнат`);
       showFrame(guestInput, ERROR_COLOR);
     } else if (guestNumber > roomNumber) {
       setCustomMessage(guestInput, `доступное кол-во гостей не более ${roomNumber}`);
@@ -183,6 +184,6 @@ const onCapacityChange = () => {
 guestInput.addEventListener('change', onCapacityChange());
 guestInput.addEventListener('invalid', onCapacityChange());
 
-roomInput.addEventListener('change',onCapacityChange());
+roomInput.addEventListener('change', onCapacityChange());
 
 export {submitForm, checkPropertyCost};
